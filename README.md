@@ -56,7 +56,7 @@ If you want to train your own BERT-based model for sentiment analysis on the Sen
 
 ### Step 1: Download the Sentiment140 Dataset
 
-You can download the Sentiment140 dataset [here](https://www.kaggle.com/datasets/kazanova/sentiment140). You must extract it and insert the .csv file into the main directory.
+You can download the Sentiment140 dataset [here](https://www.kaggle.com/datasets/kazanova/sentiment140). You must extract it and insert the .csv file into the main directory. Additionally, the .csv file must be renamed to sentiment140.csv.
 
 ### Step 2: Train the Model
 

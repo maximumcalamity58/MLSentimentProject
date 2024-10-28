@@ -77,7 +77,7 @@ def main():
     df['Sentiment'] = df['Sentiment'].apply(lambda x: 1 if x == 4 else 0)
 
     # Optional: Use a subset of data for faster processing
-    df = df.sample(frac=0.2, random_state=42)  # Use 10% of the data
+    df = df.sample(frac=1, random_state=42)  # Use 10% of the data
     df.reset_index(drop=True, inplace=True)  # Reset index after sampling
 
     print(f"Total number of samples: {len(df)}")

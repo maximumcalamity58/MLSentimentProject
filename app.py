@@ -1,4 +1,3 @@
-import os
 import sys
 import subprocess
 
@@ -22,12 +21,10 @@ import re
 import pandas as pd
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
-import torch_directml
 from flask import Flask, render_template, request, jsonify
 import emoji
 import contractions
 import nltk
-import logging
 
 # Ensure NLTK data is downloaded (place this after imports)
 def ensure_nltk_data():

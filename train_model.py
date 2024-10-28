@@ -11,7 +11,6 @@ import logging
 import emoji
 import contractions
 import multiprocessing as mp
-import numpy as np
 
 # Suppress NLTK logging and output
 logging.getLogger("nltk").setLevel(logging.CRITICAL)

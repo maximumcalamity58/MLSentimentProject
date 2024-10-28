@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-time Sentiment Analysis</title>
+    <style>
+        /* Add any necessary CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+        #sentiment {
+            font-weight: bold;
+        }
+        .positive {
+            color: green;
+        }
+        .negative {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Type a Message for Sentiment Analysis</h1>
+    <textarea id="inputBox" placeholder="Type your message..."></textarea>
+    <p>Sentiment: <span id="sentiment"></span></p>
+
+    <h2>Or Generate a Random Tweet</h2>
+    <button id="randomTweet">Generate Random Tweet</button>
+    <p>Random Tweet: <span id="randomTweetText"></span></p>
+
+    <script>
+        const inputBox = document.getElementById('inputBox');
+        const sentimentDisplay = document.getElementById('sentiment');
+        const randomTweetBtn = document.getElementById('randomTweet');
+        const randomTweetText = document.getElementById('randomTweetText');
+
+        // Function to update sentiment based on input text
+        function updateSentiment(message) {
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const sentiment = data.sentiment;
+                const confidence = data.confidence;
+                sentimentDisplay.textContent = `${sentiment} (Confidence: ${confidence})`;
+                sentimentDisplay.setAttribute('class', sentiment === 'positive' ? 'positive' : 'negative');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Event listener for input box to detect typing
+        inputBox.addEventListener('input', function() {
+            const message = inputBox.value;
+            if (message) {
+                updateSentiment(message);
+            } else {
+                sentimentDisplay.textContent = '';
+                sentimentDisplay.removeAttribute('class');
+            }
+        });
+
+        // Event listener for generating random tweet
+        randomTweetBtn.addEventListener('click', function() {
+            fetch('/random_tweet')
+            .then(response => response.json())
+            .then(data => {
+                randomTweetText.textContent = data.tweet;
+                inputBox.value = data.tweet;
+                updateSentiment(data.tweet);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+Flask
+torch
+transformers
+pandas
+torch_directml
+nltk
+emoji
+contractions
+tqdm

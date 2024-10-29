@@ -1,5 +1,6 @@
 Flask
 torch
+urllib3==1.26.16
 transformers
 pandas
 torch_directml
